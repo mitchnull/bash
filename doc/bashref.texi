@@ -4860,11 +4860,12 @@ or an error occurs while setting a new limit.
 @item unalias
 @btindex unalias
 @example
-unalias [-a] [@var{name} @dots{} ]
+unalias [-aq] [@var{name} @dots{} ]
 @end example
 
 Remove each @var{name} from the list of aliases.  If @option{-a} is
-supplied, all aliases are removed.
+supplied, all aliases are removed.  If @option{-q} is supplied,
+no error message is printed if a name is not a defined alias.
 Aliases are described in @ref{Aliases}.
 @end table
 

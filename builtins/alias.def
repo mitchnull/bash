@@ -155,11 +155,12 @@ alias_builtin (list)
 $BUILTIN unalias
 $FUNCTION unalias_builtin
 $DEPENDS_ON ALIAS
-$SHORT_DOC unalias [-a] name [name ...]
+$SHORT_DOC unalias [-aq] name [name ...]
 Remove each NAME from the list of defined aliases.
 
 Options:
   -a	remove all alias definitions
+  -q	quiet mode
 
 Return success unless a NAME is not an existing alias.
 $END
@@ -171,16 +172,20 @@ unalias_builtin (list)
      register WORD_LIST *list;
 {
   register alias_t *alias;
-  int opt, aflag;
+  int opt, aflag, qflag;
 
   aflag = 0;
+  qflag = 0;
   reset_internal_getopt ();
-  while ((opt = internal_getopt (list, "a")) != -1)
+  while ((opt = internal_getopt (list, "aq")) != -1)
     {
       switch (opt)
 	{
 	case 'a':
 	  aflag = 1;
+	  break;
+	case 'q':
+	  qflag = 1;
 	  break;
 	CASE_HELPOPT;
 	default:
@@ -212,7 +217,8 @@ unalias_builtin (list)
 	remove_alias (alias->name);
       else
 	{
-	  sh_notfound (list->word->word);
+          if (!qflag)
+	    sh_notfound (list->word->word);
 	  aflag++;
 	}
 

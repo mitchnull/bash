@@ -10769,12 +10769,16 @@ is omitted, the output is in a form that may be reused as input.
 The return status is 0 if the mode was successfully changed or if
 no \fImode\fP argument was supplied, and false otherwise.
 .TP
-\fBunalias\fP [\-\fBa\fP] [\fIname\fP ...]
+\fBunalias\fP [\-\fBaq\fP] [\fIname\fP ...]
 Remove each \fIname\fP from the list of defined aliases.  If
 .B \-a
 is supplied, all alias definitions are removed.  The return
 value is true unless a supplied
 .I name
+is not a defined alias.
+If
+.B \-q
+is supplied, no error message is printed if a name
 is not a defined alias.
 .TP
 \fBunset\fP [\-\fBfv\fP] [\-\fBn\fP] [\fIname\fP ...]
